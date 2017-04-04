@@ -26,6 +26,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
+ * 这个类搞定了用属性值替代propertyPlaceHolder的工作
  * Utility class for working with Strings that have placeholder values in them. A placeholder takes the form
  * {@code ${name}}. Using {@code PropertyPlaceholderHelper} these placeholders can be substituted for
  * user-supplied values. <p> Values for substitution can be supplied using a {@link Properties} instance or
@@ -184,6 +185,12 @@ public class PropertyPlaceholderHelper {
 		return result.toString();
 	}
 
+	/**
+	 * 一个字符一个字符比较过去。
+	 * @param buf
+	 * @param startIndex
+	 * @return
+	 */
 	private int findPlaceholderEndIndex(CharSequence buf, int startIndex) {
 		int index = startIndex + this.placeholderPrefix.length();
 		int withinNestedPlaceholder = 0;

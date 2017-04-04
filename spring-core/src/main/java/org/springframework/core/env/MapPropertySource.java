@@ -21,6 +21,7 @@ import java.util.Map;
 import org.springframework.util.StringUtils;
 
 /**
+ * 这里限定属性集合内容形式为Map，其他没什么特殊的，可以看作是EnumerablePropertySource的默认实现类
  * {@link PropertySource} that reads keys and values from a {@code Map} object.
  *
  * @author Chris Beams

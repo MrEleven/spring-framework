@@ -20,6 +20,8 @@ import java.util.Map;
 import java.util.Properties;
 
 /**
+ * 这里仅仅只是定义了一个source为Properties的SourceProperty。
+ * Properties其实诗歌Hashtable，key可能是null，这里仅限key为String类型的使用方式
  * {@link PropertySource} implementation that extracts properties from a
  * {@link java.util.Properties} object.
  *

@@ -36,6 +36,7 @@ import org.springframework.util.ReflectionUtils;
 import org.springframework.util.StringUtils;
 
 /**
+ * 这个类比较简单，主要是从META-INF/spring.factories这个文件中根据传入的接口类型获取配置的实现类，并实例化.
  * General purpose factory loading mechanism for internal use within the framework.
  *
  * <p>{@code SpringFactoriesLoader} {@linkplain #loadFactories loads} and instantiates
@@ -62,6 +63,7 @@ public abstract class SpringFactoriesLoader {
 	/**
 	 * The location to look for factories.
 	 * <p>Can be present in multiple JAR files.
+	 * 这个名字取得比较怪,为啥叫factory？
 	 */
 	public static final String FACTORIES_RESOURCE_LOCATION = "META-INF/spring.factories";
 
@@ -100,6 +102,7 @@ public abstract class SpringFactoriesLoader {
 	 * Load the fully qualified class names of factory implementations of the
 	 * given type from {@value #FACTORIES_RESOURCE_LOCATION}, using the given
 	 * class loader.
+	 * 获取spring.factories中符合factoryClass的类名列表
 	 * @param factoryClass the interface or abstract class representing the factory
 	 * @param classLoader the ClassLoader to use for loading resources; can be
 	 * {@code null} to use the default
@@ -109,6 +112,7 @@ public abstract class SpringFactoriesLoader {
 	public static List<String> loadFactoryNames(Class<?> factoryClass, ClassLoader classLoader) {
 		String factoryClassName = factoryClass.getName();
 		try {
+			// 找到classPath中所有名字为spring.factories的文件
 			Enumeration<URL> urls = (classLoader != null ? classLoader.getResources(FACTORIES_RESOURCE_LOCATION) :
 					ClassLoader.getSystemResources(FACTORIES_RESOURCE_LOCATION));
 			List<String> result = new ArrayList<String>();

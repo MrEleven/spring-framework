@@ -18,7 +18,7 @@ package org.springframework.core.env;
 
 /**
  * Holder containing one or more {@link PropertySource} objects.
- *
+ * PropertySource的集合类，类似于HashMap<String, T>
  * @author Chris Beams
  * @since 3.1
  */

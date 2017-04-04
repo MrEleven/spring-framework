@@ -21,17 +21,16 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Simple stop watch, allowing for timing of a number of tasks,
- * exposing total running time and running time for each named task.
+ * StopWatch中文意思为秒表
+ * 一个简单的秒表，用来给一定数量的任务计时，暴露所有的运行时间和每个任务的运行时间
  *
- * <p>Conceals use of {@code System.currentTimeMillis()}, improving the
- * readability of application code and reducing the likelihood of calculation errors.
+ * 隐藏System.currentTimeMillis()的使用，提高代码的可读性，减少计算错误的可能性
  *
- * <p>Note that this object is not designed to be thread-safe and does not
- * use synchronization.
+ * 这个对象不使用synchronization，所以不是线程安全的
  *
- * <p>This class is normally used to verify performance during proof-of-concepts
- * and in development, rather than as part of production applications.
+ * 这个类一般用在开发阶段进行性能测试的，并不在生产环境使用
+ *
+ * 没什么特别的，记录了一大堆任务的运行总时间和每个任务的时间
  *
  * @author Rod Johnson
  * @author Juergen Hoeller
@@ -51,7 +50,7 @@ public class StopWatch {
 
 	private final List<TaskInfo> taskList = new LinkedList<TaskInfo>();
 
-	/** Start time of the current task */
+	/** 当前任务的开始时间 */
 	private long startTimeMillis;
 
 	/** Is the stop watch currently running? */
@@ -292,11 +291,12 @@ public class StopWatch {
 
 	/**
 	 * Inner class to hold data about one task executed within the stop watch.
+     * StopWatch的内部类，记录一些任务相关的执行信息
 	 */
 	public static final class TaskInfo {
 
 		private final String taskName;
-
+        /* 毫秒 */
 		private final long timeMillis;
 
 		TaskInfo(String taskName, long timeMillis) {

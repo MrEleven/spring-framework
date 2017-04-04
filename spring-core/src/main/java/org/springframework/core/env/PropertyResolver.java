@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package org.springframework.core.env;
+package org.springwork.core.env;
 
 /**
+ * 解析属性用的
  * Interface for resolving properties against any underlying source.
  *
  * @author Chris Beams

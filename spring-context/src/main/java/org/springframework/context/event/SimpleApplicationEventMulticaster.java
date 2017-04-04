@@ -27,6 +27,7 @@ import org.springframework.core.ResolvableType;
 import org.springframework.util.ErrorHandler;
 
 /**
+ * ApplicationEventMulticaster的简单实现。用来分发应用程序事件给侦听器
  * Simple implementation of the {@link ApplicationEventMulticaster} interface.
  *
  * <p>Multicasts all events to all registered listeners, leaving it up to

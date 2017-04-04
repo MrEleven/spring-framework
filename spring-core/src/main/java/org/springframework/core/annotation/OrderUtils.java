@@ -21,6 +21,7 @@ import java.lang.annotation.Annotation;
 import org.springframework.util.ClassUtils;
 
 /**
+ * 用来获取Order值
  * General utility for determining the order of an object based on its type declaration.
  * Handles Spring's {@link Order} annotation as well as {@link javax.annotation.Priority}.
  *

@@ -22,6 +22,7 @@ import java.util.List;
 import org.springframework.util.StringUtils;
 
 /**
+ * 正如名字，单纯只是用来保存命令行设置的属性的
  * Abstract base class for {@link PropertySource} implementations backed by command line
  * arguments. The parameterized type {@code T} represents the underlying source of command
  * line options. This may be as simple as a String array in the case of

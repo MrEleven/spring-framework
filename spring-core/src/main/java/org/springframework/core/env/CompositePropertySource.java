@@ -53,6 +53,11 @@ public class CompositePropertySource extends EnumerablePropertySource<Object> {
 	}
 
 
+	/**
+	 * 从多个源根据name寻找属性
+	 * @param name
+	 * @return
+	 */
 	@Override
 	public Object getProperty(String name) {
 		for (PropertySource<?> propertySource : this.propertySources) {
@@ -74,6 +79,10 @@ public class CompositePropertySource extends EnumerablePropertySource<Object> {
 		return false;
 	}
 
+	/**
+	 * 返回所有的propertySource的name，并去重
+	 * @return
+	 */
 	@Override
 	public String[] getPropertyNames() {
 		Set<String> names = new LinkedHashSet<String>();

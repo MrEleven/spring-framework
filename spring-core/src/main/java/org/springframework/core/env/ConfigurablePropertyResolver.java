@@ -19,6 +19,9 @@ package org.springframework.core.env;
 import org.springframework.core.convert.support.ConfigurableConversionService;
 
 /**
+ * 可配置的 PropertyResolver，主要包含两方面的配置
+ * 1. ConversionService
+ * 2. PlaceholderSuffix,ValueSeparator
  * Configuration interface to be implemented by most if not all {@link PropertyResolver}
  * types. Provides facilities for accessing and customizing the
  * {@link org.springframework.core.convert.ConversionService ConversionService}

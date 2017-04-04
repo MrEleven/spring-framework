@@ -26,6 +26,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.util.StringUtils;
 
 /**
+ * PropertySources的默认实现，用于操作包含的propertySource
  * Default implementation of the {@link PropertySources} interface.
  * Allows manipulation of contained property sources and provides a constructor
  * for copying an existing {@code PropertySources} instance.
@@ -42,7 +43,7 @@ import org.springframework.util.StringUtils;
 public class MutablePropertySources implements PropertySources {
 
 	private final Log logger;
-
+    // 内部包含的PropertySource
 	private final List<PropertySource<?>> propertySourceList = new CopyOnWriteArrayList<PropertySource<?>>();
 
 
@@ -73,6 +74,11 @@ public class MutablePropertySources implements PropertySources {
 	}
 
 
+    /**
+     * 这里PropertySource重写了equals，是否相同的比较单纯只是name的比较。
+     * @param name
+     * @return
+     */
 	@Override
 	public boolean contains(String name) {
 		return this.propertySourceList.contains(PropertySource.named(name));
@@ -122,6 +128,7 @@ public class MutablePropertySources implements PropertySources {
 			logger.debug(String.format("Adding [%s] PropertySource with search precedence immediately higher than [%s]",
 					propertySource.getName(), relativePropertySourceName));
 		}
+        /* 自己不能在自己的前面 */
 		assertLegalRelativeAddition(relativePropertySourceName, propertySource);
 		removeIfPresent(propertySource);
 		int index = assertPresentAndGetIndex(relativePropertySourceName);
@@ -144,6 +151,7 @@ public class MutablePropertySources implements PropertySources {
 	}
 
 	/**
+     * 获取优先级，其实只是获取propertySourceList中的位置而已，越小表示优先级越高
 	 * Return the precedence of the given property source, {@code -1} if not found.
 	 */
 	public int precedenceOf(PropertySource<?> propertySource) {

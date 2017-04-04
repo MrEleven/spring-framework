@@ -24,6 +24,8 @@ import java.util.List;
 import org.springframework.util.ObjectUtils;
 
 /**
+ * 这个类主要是用来排序的，根据order值升序，priority降序。如果order值相同，则随机顺序。
+ * 如果对象没有继承Order接口，则被作为最低优先级处理。
  * {@link Comparator} implementation for {@link Ordered} objects, sorting
  * by order value ascending, respectively by priority descending.
  *
@@ -49,6 +51,7 @@ public class OrderComparator implements Comparator<Object> {
 
 	/**
 	 * Shared default instance of {@code OrderComparator}.
+     * 享元模式
 	 */
 	public static final OrderComparator INSTANCE = new OrderComparator();
 
@@ -73,6 +76,13 @@ public class OrderComparator implements Comparator<Object> {
 		return doCompare(o1, o2, null);
 	}
 
+    /**
+     * PriorityOrdered对象优先级总是比Ordered高
+     * @param o1
+     * @param o2
+     * @param sourceProvider
+     * @return
+     */
 	private int doCompare(Object o1, Object o2, OrderSourceProvider sourceProvider) {
 		boolean p1 = (o1 instanceof PriorityOrdered);
 		boolean p2 = (o2 instanceof PriorityOrdered);
@@ -90,6 +100,8 @@ public class OrderComparator implements Comparator<Object> {
 	}
 
 	/**
+     * 简单来说就是如果sourceProvider有效，就用sourceProvider策略，如果无效就用对象本身.
+     * 目前来看这个OrderSourceProvider就是用来针对数组才起作用的
 	 * Determine the order value for the given object.
 	 * <p>The default implementation checks against the given {@link OrderSourceProvider}
 	 * using {@link #findOrder} and falls back to a regular {@link #getOrder(Object)} call.
@@ -117,6 +129,7 @@ public class OrderComparator implements Comparator<Object> {
 	}
 
 	/**
+     * 获得对象优先级，如果没有order值就返回最低优先级
 	 * Determine the order value for the given object.
 	 * <p>The default implementation checks against the {@link Ordered} interface
 	 * through delegating to {@link #findOrder}. Can be overridden in subclasses.
@@ -129,6 +142,7 @@ public class OrderComparator implements Comparator<Object> {
 	}
 
 	/**
+     * 返回Order值。如果是Ordered对象返回Order值，否则返回null
 	 * Find an order value indicated by the given object.
 	 * <p>The default implementation checks against the {@link Ordered} interface.
 	 * Can be overridden in subclasses.
@@ -140,6 +154,7 @@ public class OrderComparator implements Comparator<Object> {
 	}
 
 	/**
+     * 默认实现总是返回null，现在感觉好像没啥用。
 	 * Determine a priority value for the given object, if any.
 	 * <p>The default implementation always returns {@code null}.
 	 * Subclasses may override this to give specific kinds of values a
@@ -156,6 +171,7 @@ public class OrderComparator implements Comparator<Object> {
 
 
 	/**
+     * 排序
 	 * Sort the given List with a default OrderComparator.
 	 * <p>Optimized to skip sorting for lists with size 0 or 1,
 	 * in order to avoid unnecessary array extraction.
@@ -202,10 +218,12 @@ public class OrderComparator implements Comparator<Object> {
 	/**
 	 * Strategy interface to provide an order source for a given object.
 	 * @since 4.1
+     * 这个类写得太烂了，目前不知道是干嘛的
 	 */
 	public interface OrderSourceProvider {
 
 		/**
+         * order source 目前还不知道是个什么东西。
 		 * Return an order source for the specified object, i.e. an object that
 		 * should be checked for an order value as a replacement to the given object.
 		 * <p>Can also be an array of order source objects.

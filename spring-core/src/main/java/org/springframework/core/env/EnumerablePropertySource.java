@@ -19,6 +19,8 @@ package org.springframework.core.env;
 import org.springframework.util.ObjectUtils;
 
 /**
+ * 封装了PropertySource的使用，所有使用都通过getPropertyNames()来暴露，而不需要获取source来操作。
+ * 并且优化了containsProperty(String)的效率
  * A {@link PropertySource} implementation capable of interrogating its
  * underlying source object to enumerate all possible property name/value
  * pairs. Exposes the {@link #getPropertyNames()} method to allow callers

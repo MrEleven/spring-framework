@@ -17,6 +17,8 @@
 package org.springframework.core;
 
 /**
+ * 这个地方比较坑，看这段话的意思好像是在值相同的情况下PriorityOrdered对象一定排在Ordered对象之前
+ * 其实不是这样的，其实是无论值相不相同，都是PriorityOrdered对象一定排在Ordered对象之前.
  * Extension of the {@link Ordered} interface, expressing a <em>priority</em>
  * ordering: order values expressed by {@code PriorityOrdered} objects
  * always apply before same order values expressed by <em>plain</em>

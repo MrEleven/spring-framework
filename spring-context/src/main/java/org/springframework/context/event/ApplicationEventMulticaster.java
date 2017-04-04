@@ -21,6 +21,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.core.ResolvableType;
 
 /**
+ * 类似于一个广播器，用来分发消息到各个ApplicationListener。
  * Interface to be implemented by objects that can manage a number of
  * {@link ApplicationListener} objects, and publish events to them.
  *

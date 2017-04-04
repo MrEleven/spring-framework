@@ -25,6 +25,7 @@ import java.lang.annotation.Target;
 import org.springframework.core.Ordered;
 
 /**
+ * spring中组建顺序的注解，处理逻辑和Ordered一致
  * {@code @Order} defines the sort order for an annotated component.
  *
  * <p>The {@link #value} is optional and represents an order value as defined

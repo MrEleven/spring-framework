@@ -21,6 +21,7 @@ import java.util.Map;
 import org.springframework.util.Assert;
 
 /**
+ * 这是MapPropertySource专门为AbstractEnvironment的一个特殊实现。这个类在属性名中允许使用.和-。
  * Specialization of {@link MapPropertySource} designed for use with
  * {@linkplain AbstractEnvironment#getSystemEnvironment() system environment variables}.
  * Compensates for constraints in Bash and other shells that do not allow for variables
@@ -141,10 +142,19 @@ public class SystemEnvironmentPropertySource extends MapPropertySource {
 		return null;
 	}
 
+    /**
+     * 是否包含这个属性
+     * @param name
+     * @return
+     */
 	private boolean containsKey(String name) {
 		return (isSecurityManagerPresent() ? this.source.keySet().contains(name) : this.source.containsKey(name));
 	}
 
+    /**
+     * 擦，这个好像很厉害的样子
+     * @return
+     */
 	protected boolean isSecurityManagerPresent() {
 		return (System.getSecurityManager() != null);
 	}

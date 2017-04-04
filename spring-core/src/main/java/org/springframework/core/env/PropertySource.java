@@ -23,6 +23,9 @@ import org.springframework.util.Assert;
 import org.springframework.util.ObjectUtils;
 
 /**
+ * 简单来说呢，这个其实就是一个HashMap<String, T>，用来记录属性和属性值，
+ * 这里的name只是属性集合的名称，真正的属性信息存储在source中，反正是个key/value这种类型的值。
+ * 比如name可能是systemProperties，systemEnvironment，applicationConfig: [classpath:/application.properties]这种，并不是属性的name。
  * Abstract base class representing a source of name/value property pairs. The underlying
  * {@linkplain #getSource() source object} may be of any type {@code T} that encapsulates
  * properties. Examples include {@link java.util.Properties} objects, {@link java.util.Map}
@@ -87,6 +90,7 @@ public abstract class PropertySource<T> {
 
 
 	/**
+     * 获取属性集合的名称
 	 * Return the name of this {@code PropertySource}
 	 */
 	public String getName() {
@@ -94,6 +98,7 @@ public abstract class PropertySource<T> {
 	}
 
 	/**
+     * 获取属性集合
 	 * Return the underlying source object for this {@code PropertySource}.
 	 */
 	public T getSource() {
@@ -101,6 +106,7 @@ public abstract class PropertySource<T> {
 	}
 
 	/**
+     * 检查属性集合中是否包含属性名为name的属性
 	 * Return whether this {@code PropertySource} contains the given name.
 	 * <p>This implementation simply checks for a {@code null} return value
 	 * from {@link #getProperty(String)}. Subclasses may wish to implement
@@ -112,6 +118,7 @@ public abstract class PropertySource<T> {
 	}
 
 	/**
+     * 根据属性名获取属性值
 	 * Return the value associated with the given name,
 	 * or {@code null} if not found.
 	 * @param name the property to find
@@ -121,6 +128,7 @@ public abstract class PropertySource<T> {
 
 
 	/**
+     * 只要属性集合的名称相同，则认为相同
 	 * This {@code PropertySource} object is equal to the given object if:
 	 * <ul>
 	 * <li>they are the same instance
@@ -165,6 +173,7 @@ public abstract class PropertySource<T> {
 
 
 	/**
+     * 这个方法主要是用来做比较，生成一个集合名称为name的PropertySource
 	 * Return a {@code PropertySource} implementation intended for collection comparison purposes only.
 	 * <p>Primarily for internal use, but given a collection of {@code PropertySource} objects, may be
 	 * used as follows:
@@ -187,6 +196,7 @@ public abstract class PropertySource<T> {
 
 
 	/**
+     * 仅仅只是当个PropertySource的占位符
 	 * {@code PropertySource} to be used as a placeholder in cases where an actual
 	 * property source cannot be eagerly initialized at application context
 	 * creation time.  For example, a {@code ServletContext}-based property source
@@ -215,6 +225,7 @@ public abstract class PropertySource<T> {
 
 
 	/**
+     * 其实跟StubPropertySource 差不多，仅仅是当个占位符，只不过是用来作比较，实际并不使用
 	 * @see PropertySource#named(String)
 	 */
 	static class ComparisonPropertySource extends StubPropertySource {
